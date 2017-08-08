@@ -1,0 +1,18 @@
+{
+  "name": "push",
+  "version": "1.0.0",
+  "description": "Created by Adriano Paladini, a Breaking Bug member.",
+  "main": "sample.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.ibm.com:breaking-bug/push.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http2": "^3.3.7"
+  }
+}
