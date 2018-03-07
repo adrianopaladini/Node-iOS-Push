@@ -1,88 +1,177 @@
-# Push module for Nodejs
+# Push Notification (Hybrid [iOS and Android]) [WiP]
 
-Created by Adriano Paladini, a Breaking Bug member.
+This module will allow you to send push notification to iOS and Android devices without depending from other stuff.
 
-### Prerequisite
+__This module aren't finished yet, we are building / testing it__
 
-To use these libs, node must be v6 or higher, and the project need two modules, *"http2"* for iOS and *"request"* for Android. To install these modules in your project, use:
+## Prerequisite
+Since this module uses features available after Node7, it is required of the module usage, so we decide to put the version used to build this module as starter:
 
-> npm install http2 request --save
+* Node 7.10.0 or higher;
 
-### Installation
+### Dependencies
 
-> Copy files from *"libs"* folder to your project
+Since this module communicate with other server it will install the module below:
 
+* ![request@2.81.0](https://github.com/request/request)
 
-## Use for iOS
+## Installation
 
-### Create Client
+```npm install ibm-push-notification```
 
-Client using .p12 and password
+## Parameters
+
+#### Initialization
+Here follow the params used on the client initialization
+
+| Property   | Type    | Required         | Description
+| ---------- | ------- | ---------------- | -----------
+| ios        | Object  | True             | Holds the initilization parameters used on ![iOS](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/ios#create-the-client)
+| android    | Object  | True             | Holds the initilization parameters used on ![Android](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/android#create-the-client)
+
+#### Notification
+The notification parameters will be the same defined on iOS / Android individually (but since iOS has more parameters than android, consider to use iOS model):
+
+* ![iOS](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/ios#send-the-push-notification)
+* ![Android](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/android#send-the-push-notification)
+
+## Usage
+This module allow you to work with both notifications or if you are working with just one platform (android/ios) you can require just what u 
+
+* ![iOS](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/ios)
+* ![Android](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/android)
+* Hybrid, just keep reading :D 
+
+#### Create the client
+Below you can see several different ways to create your push client
+
 ```javascript
-const APNS = require('./lib/apns');
-const apnsClient = new APNS({
+//Read the ios readme for more details about possibilities when initializing a client.
+const ios = {
     p12: '/path/to/Certificate.p12',
     password: 'test',
     bundle: 'com.yourapp.bundle'
-});
+}
+const android = {
+    key: 'here-goes-your-google-client-key'
+}
+
+const PushNotification = require('ibm-push-notification')({ ios, android })
 ```
 
-Client using cert and key in .pem extension
+### Send the Push Notification
+After create the client for the push notification, you can send it anytime following the examples below:
+
+#### One device only
+Here is an example about how to send the notification to one device only
+
+###### Only Mandatory Params
 ```javascript
-const APNS = require('./lib/apns');
-const apnsClient = new APNS({
-    cert: '/path/to/Certificate.pem',
-    key: '/path/to/PrivateKey.pem',
+const ios = {
+    p12: '/path/to/Certificate.p12',
+    password: 'test',
     bundle: 'com.yourapp.bundle'
-});
-```
-
-To convert p12 to pem file, use this command in terminal:
-> openssl pkcs12 -in Certificate.p12 -out Certificate.pem -nodes -clcerts
-
-### Sending Push Notification
-
-```javascript
-
-const notification = {
-    'aps':{badge:3, sound:"bingbong.aiff"},
-    'notification' : {title:"Foo", body:"Bar"},
-    'priority' : 5,
-    'expiration' : 0,
-    'to': 'DEVICE_ID'
 }
-
-apnsClient.send(notification).then((res) => {
-    console.log("Response  " + res);
-}).catch((err) => {
-    console.log('Error: ' + err);
-});
-```
-
-## Use for Android
-
-### Create Client
-```javascript
-const FCM = require('./lib/fcm');
-const fcmClient = new FCM({
-    key: 'FCM_KEY'
-});
-```
-
-### Sending Push Notification
-
-```javascript
-
-const notification = {
-    'notification' : {title:"Foo", body:"Bar"},
-    'priority' : 5,
-    'expiration' : 0,
-    'to': ['DEVICE_ID','DEVICE_ID']
+const android = {
+    key: 'here-goes-your-google-client-key'
 }
+const PushNotification = require('ibm-push-notification')({ ios, android })
 
-fcmClient.send(notification).then((res) => {
-    console.log("Response  " + res);
-}).catch((err) => {
-    console.log('Error: ' + err);
-});
+async function sendNotification(message) {
+    try {    
+        return await PushNotification.send({
+            notification: message
+        }, { ios: <DEVICE_ID>, android: <DEVICE_ID> })
+    } catch (err) {
+        throw err
+    }
+}
 ```
+
+###### Custom Properties
+```javascript
+const ios = {
+    p12: '/path/to/Certificate.p12',
+    password: 'test',
+    bundle: 'com.yourapp.bundle'
+}
+const android = {
+    key: 'here-goes-your-google-client-key'
+}
+const PushNotification = require('ibm-push-notification')({ ios, android })
+
+async function sendNotification(message) {
+    try {    
+        return await PushNotification.send({
+            aps: { badge:3, sound:"bingbong.aiff" },
+            notification: { title: "Foo", body: "Bar" },
+            priority: 5,
+            expiration: 0
+        }, { ios: <DEVICE_ID>, android: <DEVICE_ID> })
+    } catch (err) {
+        throw err
+    }
+}
+```
+
+#### Multiple devices
+Here is an example about how to send the notification to multiple devices (same message)
+
+###### Only Mandatory Params
+```javascript
+const ios = {
+    p12: '/path/to/Certificate.p12',
+    password: 'test',
+    bundle: 'com.yourapp.bundle'
+}
+const android = {
+    key: 'here-goes-your-google-client-key'
+}
+const PushNotification = require('ibm-push-notification')({ ios, android })
+
+async function sendNotification(message) {
+    try {    
+        return await PushNotification.send({
+            notification: message
+        }, { ios: [<DEVICE_ID_1>, <DEVICE_ID_2>], android: [<DEVICE_ID_3>, <DEVICE_ID_4>] })
+    } catch (err) {
+        throw err
+    }
+}
+```
+
+###### Custom Properties
+```javascript
+const ios = {
+    p12: '/path/to/Certificate.p12',
+    password: 'test',
+    bundle: 'com.yourapp.bundle'
+}
+const android = {
+    key: 'here-goes-your-google-client-key'
+}
+const PushNotification = require('ibm-push-notification')({ ios, android })
+
+async function sendNotification(message) {
+    try {    
+        return await PushNotification.send({
+            aps: { badge:3, sound:"bingbong.aiff" },
+            notification: { title: "Foo", body: "Bar" },
+            priority: 5,
+            expiration: 0
+        }, { ios: [<DEVICE_ID_1>, <DEVICE_ID_2>], android: [<DEVICE_ID_3>, <DEVICE_ID_4>] })
+    } catch (err) {
+        throw err
+    }
+}
+```
+
+## Authors
+
+* **Adriano** - *Initial Work* - ![adrianopaladini](https://github.com/adrianopaladini)
+* **Night** - *Review and Improvements* - ![niightly](https://github.com/niightly)
+
+
+
+
+

@@ -1,18 +1,28 @@
 {
-  "name": "push",
-  "version": "1.0.0",
-  "description": "Created by Adriano Paladini, a Breaking Bug member.",
-  "main": "sample.js",
+  "name": "ibm-push-notification",
+  "version": "0.1.1",
+  "description": "create a remote notification payload and sends it to Android / iOS servers",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": ">=7.10.0"
+  },
   "repository": {
     "type": "git",
-    "url": "git@github.ibm.com:breaking-bug/push.git"
+    "url": "https://github.com/adrianopaladini/Node-iOS-Push"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "push",
+    "push notification",
+    "push android",
+    "push ios"
+  ],
+  "author": "adpalad@br.ibm.com",
+  "license": "MIT",
   "dependencies": {
-    "http2": "^3.3.7"
+    "request": "2.81.0",
+    "http2": "3.3.7"
   }
 }
