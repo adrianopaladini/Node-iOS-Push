@@ -11,7 +11,7 @@ Since this module uses features available after Node7, it is required of the mod
 
 Since this module communicate with other server it will install the module below:
 
-* ![request@2.81.0](https://github.com/request/request)
+* [request@2.81.0](https://github.com/request/request)
 
 ## Installation
 
