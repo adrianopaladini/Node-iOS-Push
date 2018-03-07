@@ -13,7 +13,7 @@ Since this module uses features available after Node7, it is required of the mod
 
 Since this module communicate with other server it will install the module below:
 
-* ![request@2.81.0](https://github.com/request/request)
+* [request@2.81.0](https://github.com/request/request)
 
 ## Installation
 
@@ -32,14 +32,14 @@ Here follow the params used on the client initialization
 #### Notification
 The notification parameters will be the same defined on iOS / Android individually (but since iOS has more parameters than android, consider to use iOS model):
 
-* ![iOS](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/ios#send-the-push-notification)
-* ![Android](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/android#send-the-push-notification)
+* [iOS](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/ios#send-the-push-notification)
+* [Android](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/android#send-the-push-notification)
 
 ## Usage
 This module allow you to work with both notifications or if you are working with just one platform (android/ios) you can require just what u 
 
-* ![iOS](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/ios)
-* ![Android](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/android)
+* [iOS](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/ios)
+* [Android](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/android)
 * Hybrid, just keep reading :D 
 
 #### Create the client
@@ -168,8 +168,8 @@ async function sendNotification(message) {
 
 ## Authors
 
-* **Adriano** - *Initial Work* - ![adrianopaladini](https://github.com/adrianopaladini)
-* **Night** - *Review and Improvements* - ![niightly](https://github.com/niightly)
+* **Adriano** - *Initial Work* - [adrianopaladini](https://github.com/adrianopaladini)
+* **Night** - *Review and Improvements* - [niightly](https://github.com/niightly)
 
 
 
