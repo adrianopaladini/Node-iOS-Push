@@ -26,8 +26,8 @@ Here follow the params used on the client initialization
 
 | Property   | Type    | Required         | Description
 | ---------- | ------- | ---------------- | -----------
-| ios        | Object  | True             | Holds the initilization parameters used on ![iOS](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/ios#create-the-client)
-| android    | Object  | True             | Holds the initilization parameters used on ![Android](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/android#create-the-client)
+| ios        | Object  | True             | Holds the initilization parameters used on [iOS](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/ios#create-the-client)
+| android    | Object  | True             | Holds the initilization parameters used on [Android](https://github.com/adrianopaladini/Node-iOS-Push/tree/master/android#create-the-client)
 
 #### Notification
 The notification parameters will be the same defined on iOS / Android individually (but since iOS has more parameters than android, consider to use iOS model):
